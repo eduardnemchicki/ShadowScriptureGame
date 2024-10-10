@@ -8,11 +8,7 @@ using UnityEngine.UIElements;
 
 public class TextHighlight : MonoBehaviour
 {
-    [SerializeField] private MenuNames buttonType;
-    [SerializeField] private MenuItemSelectScript menuController;
-    [SerializeField] private SceneAsset sceneToOpen;
-
-    [SerializeField] private Color selectedElement = Color.cyan;
+    [SerializeField] private Color elementToggledColor = Color.cyan;
 
     private TextMeshPro textElement;
     private Color defaultColor;
@@ -22,27 +18,21 @@ public class TextHighlight : MonoBehaviour
         defaultColor = textElement.color;
     }
 
+    public void toggleColor(bool colorShouldBeDefault)
+    {
+        textElement.color = colorShouldBeDefault ? defaultColor : elementToggledColor;
+    }
     private void OnMouseEnter()
     {
-        textElement.color = selectedElement;
+        this.toggleColor(false);
     }
 
     private void OnMouseExit()
     {
-        textElement.color = defaultColor;
-
+        this.toggleColor(true);
     }
-    private void OnMouseDown()
-    {
-        textElement.color = defaultColor;
-
-        if (sceneToOpen == null)
-        {
-            menuController.GoToSubmenu(buttonType);
-        }
-        else
-        {
-            menuController.LoadLevel(sceneToOpen);
-        }
-    }
+    //private void OnMouseDown()
+    //{
+    //    this.toggleColor(false);
+    //}
 }

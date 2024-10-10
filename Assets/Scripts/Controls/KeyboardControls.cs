@@ -20,6 +20,9 @@ public class KeyboardControls : MonoBehaviour
             GameEvents.paperToggle.Invoke(paperIsUp);
             paperIsUp=!paperIsUp;
         }
-
+        if (Input.GetKeyDown(ControlList.controlsDictionary[ControlNames.PauseMenu])) 
+        {
+            GameEvents.pauseMenuToggle.Invoke();
+        }
     }
 }

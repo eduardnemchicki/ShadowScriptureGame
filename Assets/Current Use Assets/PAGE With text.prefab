@@ -580,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8703169911074031662, guid: 61b457acce5c68d4aa26be5bd7b51f0d, type: 3}
       propertyPath: m_Name
-      value: PAGE Variant
+      value: PAGE With text
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

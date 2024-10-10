@@ -4,7 +4,8 @@ using UnityEngine;
 public enum ControlNames
 {
     TakePaper = 0,
-    SelectThingie = 1
+    SelectThingie = 1,
+    PauseMenu = 2,
 }
 public static class ControlList
 {
@@ -12,7 +13,8 @@ public static class ControlList
         = new Dictionary<ControlNames, KeyCode>
         {
             { ControlNames.SelectThingie, KeyCode.Mouse0 },
-            { ControlNames.TakePaper, KeyCode.Space }
+            { ControlNames.TakePaper, KeyCode.Space },
+            { ControlNames.PauseMenu, KeyCode.Escape }
         };
 
 

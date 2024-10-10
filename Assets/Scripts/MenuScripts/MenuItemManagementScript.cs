@@ -15,12 +15,13 @@ public enum MenuNames
     Exit,
     ToNewLevel
 }
-public class MenuItemSelectScript : MonoBehaviour
+public class MenuItemManagementScript : MonoBehaviour
 {
     [SerializeField] List<TextMeshPro> Levels = new List<TextMeshPro>();
     [SerializeField] TextMeshPro GoBackButton;
     [SerializeField] TextMeshPro CurrentPageName;
     [SerializeField] List<TextMeshPro> MainMenuElements = new List<TextMeshPro>();
+    [SerializeField] TextMeshPro CreditsTextElement;
 
     [SerializeField] private AudioClip itemSelectSound;
     [SerializeField] private AudioSource audioSource;
@@ -78,15 +79,17 @@ public class MenuItemSelectScript : MonoBehaviour
         {
             levelElement.gameObject.SetActive(levelSelect);
         }
-        GoBackButton.gameObject.SetActive(goBackButton);
         foreach (var menuElement in MainMenuElements)
         {
             menuElement.gameObject.SetActive(mainMenu);
         }
-    }
-    
+        GoBackButton.gameObject.SetActive(goBackButton);
+        CreditsTextElement.gameObject.SetActive(credits);
 
-    
+    }
+
+
+
     public void ExitGame()
     {
         Application.Quit();

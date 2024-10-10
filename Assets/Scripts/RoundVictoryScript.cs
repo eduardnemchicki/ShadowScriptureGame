@@ -8,6 +8,11 @@ public class RoundVictoryScript : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Animator doorAnimation;
     [SerializeField] private float timeToMove;
+
+    private void Awake()
+    {
+        doorAnimation.enabled = false;
+    }
     private void ExitLevel()
     {
         doorAnimation.enabled = true;
