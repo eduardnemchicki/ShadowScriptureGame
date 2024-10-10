@@ -1,20 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
-public class TextHighlight : MonoBehaviour
+public class IG_TextHighlight : MonoBehaviour
 {
     [SerializeField] private Color elementToggledColor = Color.cyan;
 
-    private TextMeshPro textElement;
+    private TextMeshProUGUI textElement;
     private Color defaultColor;
     void Awake()
     {
-        this.textElement = this.gameObject.GetComponent<TextMeshPro>();
+        this.textElement = this.gameObject.GetComponent<TextMeshProUGUI>();
         defaultColor = textElement.color;
     }
 
@@ -25,11 +22,14 @@ public class TextHighlight : MonoBehaviour
     private void OnMouseEnter()
     {
         this.toggleColor(false);
+        print(elementToggledColor);
     }
 
     private void OnMouseExit()
     {
         this.toggleColor(true);
+        print(defaultColor);
+
     }
     //private void OnMouseDown()
     //{

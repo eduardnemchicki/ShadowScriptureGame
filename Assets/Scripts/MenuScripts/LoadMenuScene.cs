@@ -10,7 +10,6 @@ public class LoadMenuScene : MonoBehaviour
     //[SerializeField] SceneAsset menuScene;
     private bool menuIsOpen = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameEvents.pauseMenuToggle.AddListener(OpenClosePauseMenu);
