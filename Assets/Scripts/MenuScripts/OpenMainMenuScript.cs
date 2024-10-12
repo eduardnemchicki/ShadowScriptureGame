@@ -1,22 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadMenuScene : MonoBehaviour
+public class OpenMainMenuScript : MonoBehaviour
 {
     [SerializeField] GameObject menuToOpen;
-    //[SerializeField] SceneAsset menuScene;
+    [SerializeField] MenuManager menuManager;
     private bool menuIsOpen = false;
 
     void Start()
     {
         GameEvents.pauseMenuToggle.AddListener(OpenClosePauseMenu);
+
+        menuIsOpen = menuToOpen.activeSelf;
+
     }
 
     private void OpenClosePauseMenu()
     {
+        if (MenuManager.currentOpenMenu != MenuNames.MainMenu && menuIsOpen)
+        {
+            menuManager.GoToSubmenu(MenuNames.MainMenu);
+            return;
+        }
+
         if (menuIsOpen) //closing the pause menu
         {
             Time.timeScale = 1.0f;
@@ -26,9 +36,15 @@ public class LoadMenuScene : MonoBehaviour
         {
             Time.timeScale = 0f;
             menuToOpen.SetActive(true);
-            //SceneManager.LoadScene(menuScene.name, LoadSceneMode.Additive);
+            menuManager.GoToSubmenu(MenuNames.MainMenu);
         }
 
         menuIsOpen = !menuIsOpen;
     }
+    private void OpenClosePauseMenu(bool setState)
+    {
+        menuIsOpen = !setState;
+        OpenClosePauseMenu();
+    }
+    
 }

@@ -5,41 +5,19 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-public enum MenuNames
+public class MenuManager : MonoBehaviour
 {
-    MainMenu,
-    Credits,
-    LevelSelect,
-    Options,
-    Exit,
-    ToNewLevel
-}
-public class MenuItemManagementScript : MonoBehaviour
-{
-    [SerializeField] List<TextMeshPro> Levels = new List<TextMeshPro>();
-    [SerializeField] TextMeshPro GoBackButton;
-    [SerializeField] TextMeshPro CurrentPageName;
-    [SerializeField] List<TextMeshPro> MainMenuElements = new List<TextMeshPro>();
-    [SerializeField] TextMeshPro CreditsTextElement;
+    [SerializeField] List<TMP_Text> LevelSelectElements = new List<TMP_Text>();
+    [SerializeField] TMP_Text GoBackButton;
+    [SerializeField] TMP_Text CurrentPageNameText;
+    [SerializeField] List<TMP_Text> MainMenuElements = new List<TMP_Text>();
+    [SerializeField] List<TMP_Text> OptionsMenuElements = new List<TMP_Text>();
+    [SerializeField] TMP_Text CreditsTextElement;
 
     [SerializeField] private AudioClip itemSelectSound;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] List<SceneAsset> levels = new List<SceneAsset>();
 
-    //public void GoToCredits()
-    //{
-    //    GoToSubmenu(MenuNames.Credits);
-
-    //}
-    //public void GoToLevelSelect()
-    //{
-    //    GoToSubmenu(MenuNames.LevelSelect);
-    //}
-    //public void GoToMainMenu()
-    //{
-    //    GoToSubmenu(MenuNames.MainMenu);
-    //}
+    public static MenuNames currentOpenMenu;
 
     public void GoToSubmenu(MenuNames goToName)
     {
@@ -50,32 +28,44 @@ public class MenuItemManagementScript : MonoBehaviour
         bool mainMenu = false;
         bool levelSelect = false;
         bool goBackButton = false;
+        bool options = false;
 
         switch (goToName)
         {
             case MenuNames.MainMenu:
-                CurrentPageName.text = "Main Menu";
+                CurrentPageNameText.text = "Main Menu";
                 mainMenu = true;
                 break;
 
             case MenuNames.Credits:
-                CurrentPageName.text = "Credits";
+                CurrentPageNameText.text = "Credits";
                 goBackButton = true;
                 credits = true;
                 break;
 
             case MenuNames.LevelSelect:
-                CurrentPageName.text = "Level Select";
+                CurrentPageNameText.text = "Level Select";
                 goBackButton = true;
                 levelSelect = true;
+                break;
+
+            case MenuNames.Options:
+                CurrentPageNameText.text = "Options";
+                goBackButton = true;
+                options = true;
                 break;
 
             case MenuNames.Exit:
                 ExitGame();
                 break;
+
+            default:
+                CurrentPageNameText.text = "Main Menu";
+                mainMenu = true;
+                break;
         }
 
-        foreach (var levelElement in Levels)
+        foreach (var levelElement in LevelSelectElements)
         {
             levelElement.gameObject.SetActive(levelSelect);
         }
@@ -83,9 +73,14 @@ public class MenuItemManagementScript : MonoBehaviour
         {
             menuElement.gameObject.SetActive(mainMenu);
         }
+        foreach (var optionsElement in OptionsMenuElements)
+        {
+            optionsElement.gameObject.SetActive(options);
+        }
         GoBackButton.gameObject.SetActive(goBackButton);
         CreditsTextElement.gameObject.SetActive(credits);
 
+        currentOpenMenu = goToName;
     }
 
 
@@ -99,6 +94,6 @@ public class MenuItemManagementScript : MonoBehaviour
     {
         audioSource.clip = itemSelectSound;
         audioSource.Play();
-        SceneManager.LoadScene(levelScene.name,LoadSceneMode.Single);
+        SceneManager.LoadScene(levelScene.name, LoadSceneMode.Single);
     }
 }

@@ -1,12 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum ControlNames
-{
-    TakePaper = 0,
-    SelectThingie = 1,
-    PauseMenu = 2,
-}
+
 public static class ControlList
 {
     public static Dictionary<ControlNames, KeyCode> controlsDictionary

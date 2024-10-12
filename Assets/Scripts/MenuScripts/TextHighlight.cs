@@ -1,38 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class TextHighlight : MonoBehaviour
+public class TextHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Color elementToggledColor = Color.cyan;
 
-    private TextMeshPro textElement;
+    private TextMeshProUGUI textElement;
     private Color defaultColor;
     void Awake()
     {
-        this.textElement = this.gameObject.GetComponent<TextMeshPro>();
+        this.textElement = this.gameObject.GetComponent<TextMeshProUGUI>();
         defaultColor = textElement.color;
+        GameEvents.pauseMenuToggle.AddListener(() => toggleColor(false));
     }
 
     public void toggleColor(bool colorShouldBeDefault)
     {
-        textElement.color = colorShouldBeDefault ? defaultColor : elementToggledColor;
+        textElement.color = colorShouldBeDefault ? elementToggledColor : defaultColor;
     }
-    private void OnMouseEnter()
-    {
-        this.toggleColor(false);
-    }
-
-    private void OnMouseExit()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         this.toggleColor(true);
     }
-    //private void OnMouseDown()
-    //{
-    //    this.toggleColor(false);
-    //}
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        this.toggleColor(false);
+    }
 }
