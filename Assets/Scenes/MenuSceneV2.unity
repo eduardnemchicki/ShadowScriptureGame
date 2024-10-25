@@ -6619,6 +6619,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 882759970326823355, guid: 33d6e3423e865d841a412887dd19309a, type: 3}
+      propertyPath: m_text
+      value: 'Shadow Scripture
+
+
+        by MightyPirate
+
+
+        Assets used:
+
+        Music:
+
+        DarkShadows
+        by David Fesliyan
+
+
+        Sounds:
+
+        Chains pack by richardmoore
+
+        https://freesound.org/people/richardemoore
+
+
+
+        Powered
+        By Unity Game Engine'
+      objectReference: {fileID: 0}
     - target: {fileID: 4004821588695815229, guid: 33d6e3423e865d841a412887dd19309a, type: 3}
       propertyPath: m_Name
       value: MainMenu

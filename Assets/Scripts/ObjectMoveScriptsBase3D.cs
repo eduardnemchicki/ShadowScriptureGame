@@ -44,7 +44,10 @@ public static class ObjectMoveScriptsBase3D
             finalColor = new Color(0, 0, 0, 1);
         }
         float elapsedTime = 0f;
-        Color startColor = imageToFade.color;
+
+        //Color startColor = imageToFade.color;
+        Color startColor = new Color(0, 0, 0, 0);
+        imageToFade.color = startColor;
 
         while (elapsedTime < timeToFullFade)
         {

@@ -20,7 +20,7 @@ public class RoundVictoryScript : MonoBehaviour
     {
         doorAnimation.enabled = false;
     }
-    private void ExitLevel()
+    public void ExitLevel()
     {
         doorAnimation.enabled = true;
         StartCoroutine(ObjectMoveScriptsBase3D.MoveToTarget(targetBeforeDoor.position, targetBeforeDoor.rotation, mainCamera.transform, timeToMoveToDoor,FadeOutExit));
