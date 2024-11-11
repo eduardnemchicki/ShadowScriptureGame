@@ -19,6 +19,7 @@ public class RoundVictoryScript : MonoBehaviour
     private void Awake()
     {
         doorAnimation.enabled = false;
+        GameEvents.levelComplete.AddListener(ExitLevel);
     }
     public void ExitLevel()
     {
@@ -30,6 +31,7 @@ public class RoundVictoryScript : MonoBehaviour
     {
         StartCoroutine(ObjectMoveScriptsBase3D.MoveToTarget(targetAfterDoor.position, targetAfterDoor.rotation, mainCamera.transform, timeToMoveOutTheDoor));
         StartCoroutine(ObjectMoveScriptsBase3D.FadeOut(uiFadeOutImage,fadeDuration));
+
     }
 
 }

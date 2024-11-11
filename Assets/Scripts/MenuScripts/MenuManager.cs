@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] List<TMP_Text> LevelSelectElements = new List<TMP_Text>();
-    [SerializeField] TMP_Text GoBackButton;
-    [SerializeField] TMP_Text CurrentPageNameText;
-    [SerializeField] List<TMP_Text> MainMenuElements = new List<TMP_Text>();
-    [SerializeField] List<TMP_Text> OptionsMenuElements = new List<TMP_Text>();
-    [SerializeField] TMP_Text CreditsTextElement;
+    [SerializeField] private List<TMP_Text> LevelSelectElements = new List<TMP_Text>();
+    [SerializeField] private TMP_Text GoBackButton;
+    [SerializeField] private TMP_Text CurrentPageNameText;
+    [SerializeField] private List<TMP_Text> MainMenuElements = new List<TMP_Text>();
+    [SerializeField] private List<TMP_Text> OptionsMenuElements = new List<TMP_Text>();
+    [SerializeField] private GameObject CreditsTextElement;
 
     [SerializeField] private AudioClip itemSelectSound;
     [SerializeField] private AudioSource audioSource;

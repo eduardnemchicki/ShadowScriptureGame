@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ClickableObject : MonoBehaviour
 {
-    [SerializeField] private PuzzleObjectType elementType;
+    public PuzzleObjectType elementType;
     //[SerializeField] private string elementType;
     private bool clickable;
     List<ParticleSystem> lights = new List<ParticleSystem>();
@@ -15,6 +15,7 @@ public class ClickableObject : MonoBehaviour
         clickable = false;
         GameEvents.paperToggle.AddListener((x) => clickable = x);
 
+        PuzzleScript.listOfPuzzleElements.Add(this);
         if(elementType == PuzzleObjectType.CandlesLit || elementType == PuzzleObjectType.CandlesNotLit)
         {
             lights.AddRange(gameObject.GetComponentsInChildren<ParticleSystem>(true));
