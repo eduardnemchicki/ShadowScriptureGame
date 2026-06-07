@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// [AI OVERVIEW] Moves this Transform between origin and targetPlace when GameEvents.paperToggle fires (e.g. paper/instrument raised or lowered). Uses ObjectMoveScriptsBase3D.MoveToTarget; pairs with ControlsUsage and candle/paper gameplay flow.
 public class ObjectMoveScript : MonoBehaviour
 {
     private Vector3 originPlace;

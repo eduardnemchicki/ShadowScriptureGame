@@ -1,14 +1,16 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// [AI OVERVIEW] Abstract ScriptableObject victory rules evaluated against PuzzleScript (playerActionHistory, listOfPuzzleElements via ClickableObject). Concrete assets: NoSuchObject, ClickSequence, LastActionType. Designed to be assigned on PuzzleScript in the inspector.
 public abstract class VictoryCondition : ScriptableObject
 {
     public abstract bool IsConditionMet(PuzzleScript actionHistory);
 }
 
+// [AI OVERVIEW] Wins when no ClickableObject in PuzzleScript.listOfPuzzleElements has elementType == typeThatShouldNotExist.
 [CreateAssetMenu(fileName = "Condition_NoObjectOfType", menuName = "Puzzle/VictoryCondition_NoSuchObject")]
 public class VictoryCondition_NoSuchObject : VictoryCondition
 {
@@ -29,6 +31,7 @@ public class VictoryCondition_NoSuchObject : VictoryCondition
     }
 }
 
+// [AI OVERVIEW] Wins when the tail of PuzzleScript.playerActionHistory matches requiredSequence (PuzzleObjectType order).
 [CreateAssetMenu(fileName = "Condition_ClickSequence", menuName = "Puzzle/VictoryCondition_ClickSequence")]
 public class VictoryCondition_ClickSequence : VictoryCondition
 {
@@ -58,6 +61,7 @@ public class VictoryCondition_ClickSequence : VictoryCondition
 
 
 
+// [AI OVERVIEW] Wins when the last numberOfObjects entries in playerActionHistory (with offsetFromEnd) are all in typesOfPress.
 [CreateAssetMenu(fileName = "Condition_LastActionType", menuName = "Puzzle/VictoryCondition_LastActionType")]
 public class VictoryCondition_LastActionType : VictoryCondition
 {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// [AI OVERVIEW] Moves the candle Transform with Horizontal/Vertical axes when active; disabled while paper is down (GameEvents.paperToggle). Clamps position to min/max X/Y; pairs with ControlsUsage paper flow and CandleTextInteraction on same object hierarchy.
 public class CandleMovement : MonoBehaviour
 {
     public float moveSpeed = 10f;

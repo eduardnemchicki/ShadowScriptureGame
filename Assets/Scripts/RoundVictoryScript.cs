@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// [AI OVERVIEW] Plays level-complete exit: subscribes to GameEvents.levelComplete, moves mainCamera via ObjectMoveScriptsBase3D to door targets, plays door Animator, fades uiFadeOutImage. Serialized Camera, Transforms, Animator, and UI Image.
 public class RoundVictoryScript : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;

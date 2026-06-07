@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// [AI OVERVIEW] UNUSED free-fly camera: WASD move on Horizontal/Vertical, mouse look on Mouse X/Y. Not referenced by GameEvents or puzzle flow; level camera handled by RoundVictoryScript and scene setup instead.
 public class CameraMovement : MonoBehaviour
 {
     public float moveSpeed = 10f;

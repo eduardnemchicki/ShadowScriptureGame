@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
+// [AI OVERVIEW] Hover highlight for menu TextMeshProUGUI (cyan on enter, default on exit). Resets color on GameEvents.pauseMenuToggle. Used by MenuButtonClick via toggleColor; implements Unity UI pointer events.
 public class TextHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Color elementToggledColor = Color.cyan;

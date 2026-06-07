@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// [AI OVERVIEW] Static coroutine utilities: smooth Transform lerp (position/rotation) with optional callback, and UI Image fade to black. Used by ObjectMoveScript (paper up/down) and RoundVictoryScript (camera exit sequence).
 public static class ObjectMoveScriptsBase3D 
 {
     //public static IEnumerator MoveToTarget(Vector3 newPlace, Quaternion newRotation, Transform objectToMove, float timeToMove)

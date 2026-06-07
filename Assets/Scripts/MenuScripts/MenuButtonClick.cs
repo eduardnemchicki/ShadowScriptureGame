@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// [AI OVERVIEW] UI click handler for menu TMP labels. On click resets TextHighlight and calls MenuManager.GoToSubmenu or LoadLevel (MenuNames.ToNewLevel + SceneAsset). Requires TextHighlight on same GameObject; serialized MenuManager reference.
 [RequireComponent(typeof(TextHighlight))]
 public class MenuButtonClick : MonoBehaviour, IPointerClickHandler
 {
@@ -13,9 +14,11 @@ public class MenuButtonClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] private SceneAsset sceneToOpen;
     [SerializeField] private MenuNames buttonType;
     [SerializeField] private MenuManager menuItemSelectorScript;
-
+    bool isBlocked;
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(isBlocked) return;
+
         textHighlight.toggleColor(false);
 
         if (buttonType == MenuNames.ToNewLevel)
@@ -32,7 +35,9 @@ public class MenuButtonClick : MonoBehaviour, IPointerClickHandler
     {
         if (textHighlight == null) // if i get too lasy to assign it all by hand
         {
+            isBlocked = false;
             textHighlight = this.gameObject.GetComponent<TextHighlight>();
+            GameEvents.blockMenuButtons.AddListener(x => isBlocked = x);
         }
     }
 }

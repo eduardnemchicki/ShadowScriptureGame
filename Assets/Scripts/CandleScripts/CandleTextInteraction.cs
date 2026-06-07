@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// [AI OVERVIEW] Candle flame and scripture reveal. Maintains static listOfTexts (TextScript); listens to GameEvents.paperToggle to show/hide candleLight; each FixedUpdate raycasts from candle to each TextScript and calls RevealCheck with inverse-square light intensity. Uses Physics raycasts and serialized Light.
 public class CandleTextInteraction : MonoBehaviour
 {
     [SerializeField] private Light candleLight;

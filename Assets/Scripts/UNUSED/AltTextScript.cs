@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
+// [AI OVERVIEW] UNUSED simpler TextMeshPro reveal by min/max light band (RevealCheck). CandleTextInteraction registration commented out; FixedUpdate light logic disabled. Superseded by TextScript + CandleTextInteraction pipeline.
 public class AltTextScript : MonoBehaviour
 {
     public string secretText;

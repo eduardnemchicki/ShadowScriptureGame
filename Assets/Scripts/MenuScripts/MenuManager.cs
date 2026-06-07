@@ -5,20 +5,24 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// [AI OVERVIEW] Main menu / pause UI controller: toggles TMP_Text and Credits groups by MenuNames, plays itemSelectSound, loads levels via SceneManager from SceneAsset. static currentOpenMenu read by OpenMainMenuScript; driven by MenuButtonClick.
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private List<TMP_Text> LevelSelectElements = new List<TMP_Text>();
     [SerializeField] private TMP_Text GoBackButton;
+    [SerializeField] private TMP_Text GoBackToOptionsButton;
     [SerializeField] private TMP_Text CurrentPageNameText;
     [SerializeField] private List<TMP_Text> MainMenuElements = new List<TMP_Text>();
     [SerializeField] private List<TMP_Text> OptionsMenuElements = new List<TMP_Text>();
+    [SerializeField] private List<TMP_Text> Options_SoundMenuElements = new List<TMP_Text>();
+    [SerializeField] private List<TMP_Text> Options_ControlsMenuElements = new List<TMP_Text>();
     [SerializeField] private GameObject CreditsTextElement;
 
     [SerializeField] private AudioClip itemSelectSound;
     [SerializeField] private AudioSource audioSource;
 
-    public static MenuNames currentOpenMenu;
-
+    public static MenuNames currentOpenMenu { get; private set; }
+    public static MenuNames subMenuLastOpened { get; private set; }
     public void GoToSubmenu(MenuNames goToName)
     {
         audioSource.clip = itemSelectSound;
@@ -27,36 +31,53 @@ public class MenuManager : MonoBehaviour
         bool credits = false;
         bool mainMenu = false;
         bool levelSelect = false;
-        bool goBackButton = false;
+        bool backToMenuButton = false;
+        bool backToOptionsButton = false;
         bool options = false;
+        bool options_Sound = false;
+        bool options_Controls = false;
 
         switch (goToName)
         {
             case MenuNames.MainMenu:
+
                 CurrentPageNameText.text = "Main Menu";
                 mainMenu = true;
+
                 break;
 
             case MenuNames.Credits:
                 CurrentPageNameText.text = "Credits";
-                goBackButton = true;
+                backToMenuButton = true;
                 credits = true;
                 break;
 
             case MenuNames.LevelSelect:
                 CurrentPageNameText.text = "Level Select";
-                goBackButton = true;
+                backToMenuButton = true;
                 levelSelect = true;
                 break;
 
             case MenuNames.Options:
                 CurrentPageNameText.text = "Options";
-                goBackButton = true;
+                backToMenuButton = true;
                 options = true;
                 break;
 
             case MenuNames.Exit:
                 ExitGame();
+                break;
+
+            case MenuNames.Options_Sound:
+                CurrentPageNameText.text = "Sound";
+                backToOptionsButton = true;
+                options_Sound = true;
+                break;
+
+            case MenuNames.Options_Controls:
+                CurrentPageNameText.text = "Controls";
+                backToOptionsButton = true;
+                options_Controls = true;
                 break;
 
             default:
@@ -77,7 +98,16 @@ public class MenuManager : MonoBehaviour
         {
             optionsElement.gameObject.SetActive(options);
         }
-        GoBackButton.gameObject.SetActive(goBackButton);
+        foreach (var options_SoundElement in Options_SoundMenuElements)
+        {
+            options_SoundElement.gameObject.SetActive(options_Sound);
+        }
+        foreach (var options_ControlsElement in Options_ControlsMenuElements)
+        {
+            options_ControlsElement.gameObject.SetActive(options_Controls);
+        }
+        GoBackButton.gameObject.SetActive(backToMenuButton);
+        GoBackToOptionsButton.gameObject.SetActive(backToOptionsButton);
         CreditsTextElement.gameObject.SetActive(credits);
 
         currentOpenMenu = goToName;
