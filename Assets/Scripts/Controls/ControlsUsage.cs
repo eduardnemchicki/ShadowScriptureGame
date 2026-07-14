@@ -10,24 +10,30 @@ public class ControlsUsage : MonoBehaviour
     bool paperIsUp;
     bool objectsHighlighted;
     bool controlsChanging;
+    public static bool menuCantBeToggled;
 
+    void Awake()
+    {
+        ControlList.LoadControlsFromFile();
+    }
     void Start()
     {
         paperIsUp = true;
         objectsHighlighted = false;
         controlsChanging = false;
+        menuCantBeToggled = false;
         GameEvents.blockMenuButtons.AddListener(x => controlsChanging = x);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(ControlList.controlsDictionary[ControlNames.TakePaper]) && !mainMenuScript.menuIsOpen && !controlsChanging)
+        if (Input.GetKeyDown(ControlList.controlsDictionary[ControlNames.TakePaper]) && !mainMenuScript.menuIsOpen && !controlsChanging && !menuCantBeToggled)
         {
             GameEvents.paperToggle.Invoke(paperIsUp);
             paperIsUp=!paperIsUp;
         }
         
-        if (Input.GetKeyDown(ControlList.controlsDictionary[ControlNames.PauseMenu]) && !controlsChanging) 
+        if (Input.GetKeyDown(ControlList.controlsDictionary[ControlNames.PauseMenu]) && !controlsChanging && !menuCantBeToggled) 
         {
             GameEvents.pauseMenuToggle.Invoke();
         }
@@ -35,11 +41,11 @@ public class ControlsUsage : MonoBehaviour
         if (Input.GetKey(ControlList.controlsDictionary[ControlNames.HighlightText]) && !paperIsUp && !mainMenuScript.menuIsOpen && !controlsChanging)
         {
             objectsHighlighted = true;
-            GameEvents.textHighlightToggle.Invoke(true);
+            GameEvents.objectHighlightToggle.Invoke(true);
         }
         else if(objectsHighlighted)
         {
-            GameEvents.textHighlightToggle.Invoke(false);
+            GameEvents.objectHighlightToggle.Invoke(false);
             objectsHighlighted = false;
         }
     }

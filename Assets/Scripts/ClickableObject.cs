@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 // [AI OVERVIEW] Puzzle interactable on 3D objects. Registers with PuzzleScript.listOfPuzzleElements; listens to GameEvents.paperToggle for click enable; on mouse click plays AudioSource and toggles candle ParticleSystems, then invokes GameEvents.puzzleElementClicked with PuzzleObjectType. Uses PuzzleObjectType enum; expects AudioSource and child particle lights on candle objects.
@@ -11,14 +9,14 @@ public class ClickableObject : MonoBehaviour
     //[SerializeField] private string elementType;
     private bool clickable;
     private AudioSource attachedAudio = null;
-    List<ParticleSystem> lights = new List<ParticleSystem>();
-    List<Material> defaultMats = new List<Material>();
+    private List<ParticleSystem> lights = new List<ParticleSystem>();
+    private List<Material> defaultMats = new List<Material>();
 
 
-    private void Start()
+    private void Awake()
     {
         clickable = false;
-        GameEvents.textHighlightToggle.AddListener(HighLight);
+        GameEvents.objectHighlightToggle.AddListener(HighLight);
 
         GameEvents.paperToggle.AddListener((x) => clickable = x);
         highlightMat = CommonItemHager.highlightMat;
@@ -34,6 +32,11 @@ public class ClickableObject : MonoBehaviour
         catch
         {
             attachedAudio = null;
+        }
+
+        if (attachedAudio != null)
+        {
+            SoundControl.gameSounds.Add(attachedAudio);
         }
 
 

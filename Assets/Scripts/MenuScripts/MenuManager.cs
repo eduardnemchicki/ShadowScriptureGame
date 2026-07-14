@@ -120,10 +120,10 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
         Debug.Log("Game is exiting"); // This line is for testing in the editor, as Application.Quit() won't work in the editor
     }
-    public void LoadLevel(SceneAsset levelScene)
+    public void LoadLevel(string levelSceneName)
     {
         audioSource.clip = itemSelectSound;
         audioSource.Play();
-        SceneManager.LoadScene(levelScene.name, LoadSceneMode.Single);
+        SceneManager.LoadScene(levelSceneName, LoadSceneMode.Single);
     }
 }

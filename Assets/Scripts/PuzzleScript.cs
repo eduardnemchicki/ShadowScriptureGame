@@ -3,13 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 public class PuzzleScript : MonoBehaviour
 {
+    [SerializeField] private GameObject keyObject;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip puzzleCompleteSound;
     public static List<ClickableObject> listOfPuzzleElements = new List<ClickableObject>(); // List of all clickable objects, filled at awake by clickable objects themselves 
-
+    
     public List<VictoryCondition> victoryConditions = new List<VictoryCondition>();     // «аполн€емый вручную лист условий победы.
+
+    private bool puzzleCompleted;
 
     [SerializeField] private int maxPuzzleDepth = 10;
 
@@ -17,14 +23,22 @@ public class PuzzleScript : MonoBehaviour
 
     private void Start()
     {
+        keyObject.SetActive(false);
+        puzzleCompleted = false;
         GameEvents.puzzleElementClicked.AddListener(CheckAllConditions);
     }
     private void CheckAllConditions(PuzzleObjectType activatedElement)
     {
         AddActionToList(activatedElement);
-        if (CheckPuzzleCompletion())
+        if (CheckPuzzleCompletion() && !puzzleCompleted)
         {
-            GameEvents.levelComplete.Invoke();
+            keyObject.SetActive(true);
+            puzzleCompleted = true;
+
+            audioSource.clip = puzzleCompleteSound;
+            audioSource.Play();
+            //GameEvents.levelComplete.Invoke();
+            //GameEvents.puzzleElementClicked.RemoveListener(CheckAllConditions);
         }
     }
 

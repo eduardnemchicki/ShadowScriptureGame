@@ -13,12 +13,12 @@ public class TextAutoFillTool : MonoBehaviour
 
     [SerializeField] private int lettersPerSlot = 4;
 
-    [SerializeField] private int slotsPerLine = 4;
+    [SerializeField] private int slotsPerLine = 4; //not used currently
     [SerializeField] private float shiftFactor = 0.02f;
 
     public bool randomTextScramble = false;
     public bool randomThresh = false;
-    [SerializeField] private float maxThresh = 50;  //for random threshold option
+    [SerializeField] private float maxThresh = 50;  //for random threshold option, not implemented
     [SerializeField] private float minThresh = 10;
 
     private void Start()

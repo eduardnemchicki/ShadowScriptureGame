@@ -15,7 +15,7 @@ public class OpenMainMenuScript : MonoBehaviour
 void Start()
     {
         GameEvents.pauseMenuToggle.AddListener(OpenClosePauseMenu);
-
+        GameEvents.endSequanceFinish.AddListener(() => OpenClosePauseMenu(true));
         menuIsOpen = menuToOpen.activeSelf;
 
     }
@@ -53,5 +53,10 @@ void Start()
         }
         OpenClosePauseMenu();
     }
-    
+    private void OnDestroy()
+    {
+        GameEvents.pauseMenuToggle.RemoveListener(OpenClosePauseMenu);
+        GameEvents.endSequanceFinish.RemoveListener(() => OpenClosePauseMenu(true));
+    }
+
 }

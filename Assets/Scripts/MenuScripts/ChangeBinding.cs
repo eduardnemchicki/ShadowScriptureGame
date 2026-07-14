@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,8 +10,8 @@ public class ChangeBinding : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private ControlNames controlToChange;
     bool isWaitingForKeyPress = false; 
-    private static bool eventAlreadySent;
-
+    private static bool eventAlreadySent; //to block other thigns happening while waiting for key press, like going back to main menu or opening other menus
+    private static List<KeyCode> reservedKeys = new List<KeyCode> { KeyCode.Delete, KeyCode.Mouse0}; //reserved keys that cannot be used for controls
     void Awake()
     {
         textUpdate();
@@ -34,7 +35,7 @@ public class ChangeBinding : MonoBehaviour, IPointerClickHandler
         }
     }
 
-
+    
 
     private void textUpdate()
     {
@@ -51,14 +52,18 @@ public class ChangeBinding : MonoBehaviour, IPointerClickHandler
                 {
                     if (Input.GetKeyDown(key))
                     {
-                        if (ControlList.controlsDictionary.ContainsValue(key))
+                        if (!reservedKeys.Contains(key))
                         {
-                            var tmpKey = ControlList.controlsDictionary.First(x => x.Value == key).Key;
-                            ControlList.ChangeControlButton(tmpKey, ControlList.controlsDictionary[controlToChange]);
+
+                            if (ControlList.controlsDictionary.ContainsValue(key))
+                            {
+                                var tmpKey = ControlList.controlsDictionary.First(x => x.Value == key).Key;
+                                ControlList.ChangeControlButton(tmpKey, ControlList.controlsDictionary[controlToChange]);
+                            }
+
+                            ControlList.ChangeControlButton(controlToChange, key);
+                            ControlList.SaveControlsToFile();
                         }
-
-                        ControlList.ChangeControlButton(controlToChange, key);
-
                         GameEvents.blockMenuButtons.Invoke(false);
                         return true;
                     }

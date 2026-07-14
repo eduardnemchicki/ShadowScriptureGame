@@ -10,7 +10,9 @@ public static class GameEvents
     //public static UnityEvent instrumentFinishedMove = new UnityEvent();
     public static UnityEvent<PuzzleObjectType> puzzleElementClicked = new UnityEvent<PuzzleObjectType>();
     public static UnityEvent levelComplete = new UnityEvent();
+    public static UnityEvent endSequanceFinish = new UnityEvent();
     public static UnityEvent pauseMenuToggle = new UnityEvent();
-    public static UnityEvent<bool> textHighlightToggle = new UnityEvent<bool>();
+
+    public static UnityEvent<bool> objectHighlightToggle = new UnityEvent<bool>();
     public static UnityEvent<bool> blockMenuButtons = new UnityEvent<bool>();
 }

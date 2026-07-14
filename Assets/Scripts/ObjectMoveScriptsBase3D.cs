@@ -38,14 +38,15 @@ public static class ObjectMoveScriptsBase3D
         objectToMove.position = newPlace;  // Ensures it ends exactly at the target position
         objectToMove.rotation = newRotation;
     }
-    public static IEnumerator FadeOut(Image imageToFade, float timeToFullFade, Color finalColor = default)
+    public static IEnumerator FadeOut(Image imageToFade, float timeToFullFade, float delay, Color finalColor = default)
     {
+
         if (finalColor == default) 
         {
             finalColor = new Color(0, 0, 0, 1);
         }
         float elapsedTime = 0f;
-
+        yield return new WaitForSeconds(delay);
         //Color startColor = imageToFade.color;
         Color startColor = new Color(0, 0, 0, 0);
         imageToFade.color = startColor;
@@ -58,5 +59,6 @@ public static class ObjectMoveScriptsBase3D
             yield return null;
         }
         imageToFade.color = finalColor; // Ensure it's fully black after fade-out
+        GameEvents.endSequanceFinish.Invoke();
     }
 }

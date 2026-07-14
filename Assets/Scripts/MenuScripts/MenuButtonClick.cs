@@ -11,7 +11,7 @@ public class MenuButtonClick : MonoBehaviour, IPointerClickHandler
     //just a copy of MenuButtonInteraction class, but for use with MenuManager
 
     [SerializeField] private TextHighlight textHighlight;
-    [SerializeField] private SceneAsset sceneToOpen;
+    [SerializeField] private string sceneNameToOpen;
     [SerializeField] private MenuNames buttonType;
     [SerializeField] private MenuManager menuItemSelectorScript;
     bool isBlocked;
@@ -23,7 +23,7 @@ public class MenuButtonClick : MonoBehaviour, IPointerClickHandler
 
         if (buttonType == MenuNames.ToNewLevel)
         {
-            menuItemSelectorScript.LoadLevel(sceneToOpen);
+            menuItemSelectorScript.LoadLevel(sceneNameToOpen);
         }
         else
         {
