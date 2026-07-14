@@ -12,7 +12,11 @@ public class ObjectHighlight : MonoBehaviour
     void Start()
     {
         highlightMat = CommonItemHager.highlightMat;
-        GameEvents.objectHighlightToggle.AddListener(HighLight);
+        GameEvents.objectHighlightToggle.AddListener(HighLight); 
+        foreach (var renderer in this.gameObject.GetComponentsInChildren<Renderer>())
+        {
+            defaultMats.Add(renderer.material);
+        }
     }
 
     private void HighLight(bool shouldHighlight)
